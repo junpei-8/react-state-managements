@@ -6,7 +6,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "baseUrl": "./",
     "paths": {
-      "/*": ["src/*"]
+      "@/*": ["src/app/*"]
     },
     "strict": true,
     "jsx": "react-jsx",

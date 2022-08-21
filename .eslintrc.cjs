@@ -22,6 +22,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
 
+    'react-hooks/exhaustive-deps': 'off',
+
     'import/order': [
       'warn',
       {
