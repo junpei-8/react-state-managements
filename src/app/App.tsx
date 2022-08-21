@@ -1,18 +1,31 @@
-import './App.scss';
+import { CircularProgress, createTheme, ThemeProvider } from '@mui/material';
+import { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import Drawer, { DrawerProvider } from './Drawer';
+import Loading from './Loading';
+import { routes } from './router';
 
 function App() {
+  console.log('Render App');
+
   return (
     <div className="App">
-      <div>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src="/react.svg" className="react-logo" alt="React logo" />
-        </a>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="vite-logo" alt="Vite logo" />
-        </a>
-      </div>
-
-      <h1 className="heading">React state management</h1>
+      <ThemeProvider theme={createTheme({ palette: { mode: 'dark' } })}>
+        <Router>
+          <DrawerProvider>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                {routes.map((route) => (
+                  <Route path={`${route.path}/*`} key={route.path} element={<route.component />} />
+                ))}
+                <Route path="/" element={<Navigate to="/home" replace />} />
+              </Routes>
+            </Suspense>
+            <Drawer />
+          </DrawerProvider>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }

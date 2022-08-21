@@ -1,0 +1,111 @@
+.host {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 32px 40px;
+  grid-template-areas:
+    '. parent .'
+    'child-1 child-2 child-3';
+  max-width: 640px;
+  margin: auto;
+  font-weight: 500;
+}
+
+.parent {
+  grid-area: parent;
+}
+
+.parent,
+.child1,
+.child2,
+.child3 {
+  transition: filter 160ms ease-in-out;
+  will-change: filter;
+}
+
+.child1 {
+  grid-area: child-1;
+}
+.child2 {
+  grid-area: child-2;
+}
+.child3 {
+  grid-area: child-3;
+}
+
+.counterDivider {
+  margin: 4px;
+}
+
+.lineBoxContainer {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+}
+.lineBox1,
+.lineBox2 {
+  border-style: solid;
+  border-color: grey;
+  width: 35%;
+  height: 75%;
+  transition: border-color 160ms ease-in-out;
+}
+.lineBox1 {
+  border-width: 2px 1px 0 2px;
+  border-top-left-radius: 12px;
+}
+.lineBox2 {
+  border-width: 2px 2px 0 1px;
+  border-top-right-radius: 12px;
+}
+
+$active-color: #90caf9;
+$active-shadow: drop-shadow(0 0 12px #{$active-color}aa);
+
+.active0 {
+  .parent {
+    filter: $active-shadow;
+  }
+}
+
+.active1 {
+  .child1 {
+    filter: $active-shadow;
+  }
+
+  .lineBox1 {
+    // border-color: #61dafb;
+    border-top-color: $active-color;
+    border-left-color: $active-color;
+  }
+}
+
+.active2 {
+  .child2 {
+    filter: $active-shadow;
+  }
+
+  .lineBox1 {
+    border-right-color: $active-color;
+  }
+  .lineBox2 {
+    border-left-color: $active-color;
+  }
+}
+
+.active3 {
+  .child3 {
+    filter: $active-shadow;
+  }
+
+  .lineBox2 {
+    border-top-color: $active-color;
+    border-right-color: $active-color;
+  }
+}

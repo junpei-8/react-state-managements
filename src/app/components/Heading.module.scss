@@ -1,0 +1,51 @@
+.host {
+  width: 100%;
+  padding: 8px 0 40px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.logoLink {
+  display: inline-block;
+  padding: 16px;
+}
+
+.iconLink {
+  display: inline-block;
+  padding: 24px;
+}
+
+.icon,
+.reactLogo,
+.viteLogo {
+  will-change: filter;
+  transition: filter 160ms ease-in-out;
+}
+
+.reactLogo,
+.viteLogo {
+  width: 72px;
+  height: 72px;
+}
+.reactLogo:hover {
+  filter: drop-shadow(0 0 16px #61dafbaa);
+}
+.viteLogo:hover {
+  filter: drop-shadow(0 0 16px #646cffaa);
+}
+
+.icon {
+  width: 96px;
+  height: 96px;
+  margin: 0 16px;
+
+  &:hover {
+    filter: drop-shadow(0 0 24px currentColor);
+  }
+}
+
+.heading {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0;
+}
