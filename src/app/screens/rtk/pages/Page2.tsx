@@ -1,14 +1,14 @@
 import { Button, Divider, Switch } from '@mui/material';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { printLine } from '@/utils/utils';
+import { printLine } from '@/utils';
 import { Dispatch, State } from '../store';
 import { counterSlice } from '../store/counter';
 import { headerSlice } from '../store/header';
 
 function Page2() {
   console.log('Render Page 2');
-  printLine('cyan');
+  printLine('magenta');
 
   const [switchState, setSwitchState] = useState(false);
 

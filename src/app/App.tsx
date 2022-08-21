@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 import Drawer, { DrawerProvider } from './Drawer';
 import Loading from './Loading';
 import { routes } from './router';
-import { printLine } from './utils/utils';
+import { printLine } from './utils';
 
 function App() {
   printLine('green');

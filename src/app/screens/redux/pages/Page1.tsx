@@ -1,13 +1,14 @@
 import { Button, Divider } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { printLine } from '@/utils';
 import { Dispatch } from '../store/actions';
 import { INCREMENT_COUNT } from '../store/actions/counter';
 import { ATTACH_HEADER_CONTENT, DETACH_HEADER_CONTENT } from '../store/actions/header';
 
 function Page1() {
   console.log('Render Page 1');
-  console.log(`\u001b[36m${'-'.repeat(16)}\u001b[0m`);
+  printLine('cyan');
 
   const dispatch = useDispatch<Dispatch>();
 

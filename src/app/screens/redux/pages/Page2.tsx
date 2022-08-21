@@ -1,6 +1,7 @@
 import { Button, Divider, Switch } from '@mui/material';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { printLine } from '@/utils';
 import { Dispatch } from '../store/actions';
 import { INCREMENT_COUNT } from '../store/actions/counter';
 import { ATTACH_HEADER_CONTENT, DETACH_HEADER_CONTENT } from '../store/actions/header';
@@ -8,7 +9,7 @@ import { State } from '../store/reducers';
 
 function Page2() {
   console.log('Render Page 2');
-  console.log(`\u001b[36m${'-'.repeat(16)}\u001b[0m`);
+  printLine('magenta');
 
   const [switchState, setSwitchState] = useState(false);
 

@@ -1,6 +1,7 @@
 import { Button, Divider, TextField } from '@mui/material';
 import { FormEvent, useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { printLine } from '@/utils';
 import { Dispatch } from '../store/actions';
 import { INCREMENT_COUNT } from '../store/actions/counter';
 import { ATTACH_HEADER_CONTENT, DETACH_HEADER_CONTENT } from '../store/actions/header';
@@ -8,7 +9,7 @@ import { State } from '../store/reducers';
 
 function Page3() {
   console.log('Render Page 3');
-  console.log(`\u001b[36m${'-'.repeat(16)}\u001b[0m`);
+  printLine('yellow');
 
   const dispatch = useDispatch<Dispatch>();
 

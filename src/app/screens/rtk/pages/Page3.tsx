@@ -1,14 +1,14 @@
 import { Button, Divider, TextField } from '@mui/material';
 import { FormEvent, useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { printLine } from '@/utils/utils';
+import { printLine } from '@/utils';
 import { Dispatch, State } from '../store';
 import { counterSlice } from '../store/counter';
 import { headerSlice } from '../store/header';
 
 function Page3() {
   console.log('Render Page 3');
-  printLine('cyan');
+  printLine('yellow');
 
   const dispatch = useDispatch<Dispatch>();
 

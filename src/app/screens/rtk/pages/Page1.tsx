@@ -1,7 +1,7 @@
 import { Button, Divider } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { printLine } from '@/utils/utils';
+import { printLine } from '@/utils';
 import { Dispatch } from '../store';
 import { counterSlice } from '../store/counter';
 import { headerSlice } from '../store/header';
