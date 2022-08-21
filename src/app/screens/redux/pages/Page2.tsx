@@ -14,7 +14,7 @@ function Page2() {
 
   const dispatch = useDispatch<Dispatch>();
 
-  const headerContent = useSelector<State, State['header']['content']>((state) => state.header.content);
+  const headerContent = useSelector((state: State) => state.header.content);
 
   // グローバルなカウンターをインクリメントする
   const incrementGlobalCount = () => dispatch({ type: INCREMENT_COUNT });

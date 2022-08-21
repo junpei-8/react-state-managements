@@ -16,8 +16,8 @@ const TITLE = 'Redux' as const;
 function Redux() {
   console.log('Render Redux App');
 
-  const counter = useSelector<State, State['counter']>((state) => state.counter);
-  const headerContent = useSelector<State, State['header']['content']>((state) => state.header.content);
+  const counter = useSelector((state: State) => state.counter);
+  const headerContent = useSelector((state: State) => state.header.content);
 
   return (
     <>

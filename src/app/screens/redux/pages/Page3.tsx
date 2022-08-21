@@ -12,7 +12,7 @@ function Page3() {
 
   const dispatch = useDispatch<Dispatch>();
 
-  const headerContent = useSelector<State, State['header']['content']>((state) => state.header.content);
+  const headerContent = useSelector((state: State) => state.header.content);
 
   const [text, setText] = useState('');
 
