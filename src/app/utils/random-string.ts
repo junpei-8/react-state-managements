@@ -20,10 +20,9 @@ const WORDS = [
   'Yu-za',
 ] as const;
 
+/** ランダムな文字列を生成する */
 export function getRandomString() {
   const random = Math.floor(Math.random() * WORDS.length);
 
-  const word = WORDS[random];
-
-  return `-\u3000${word}`;
+  return WORDS[random];
 }

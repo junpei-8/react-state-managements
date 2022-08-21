@@ -17,6 +17,7 @@
     "react-redux": "^8.0.2",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
+    "recoil": "^0.7.5",
     "redux": "^4.2.0",
     "vite-plugin-svgr": "^2.2.1"
   },
