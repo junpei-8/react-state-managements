@@ -23,4 +23,10 @@ export const routes: Routes = [
     component: lazy(() => import('./screens/redux/ReduxApp')),
     icon: ReduxIcon,
   },
+  {
+    path: '/rtk',
+    name: 'RTK',
+    component: lazy(() => import('./screens/rtk/RTKApp')),
+    icon: ReduxIcon,
+  },
 ];
