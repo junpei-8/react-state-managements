@@ -1,10 +1,8 @@
 import { Button, Divider } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { printLine } from '@/utils';
-import { Dispatch } from '../store/actions';
-import { INCREMENT_COUNT } from '../store/actions/counter';
-import { ATTACH_HEADER_CONTENT, DETACH_HEADER_CONTENT } from '../store/actions/header';
+import { printLine, getRandomString } from '@/utils';
+import { Dispatch, counterAction, headerAction } from '../store/actions';
 
 function Page1() {
   console.log('Render Page 1');
@@ -15,23 +13,16 @@ function Page1() {
   const [count, setCount] = useState(0);
 
   // グローバルなカウンターをインクリメントする
-  const incrementGlobalCount = () => dispatch({ type: INCREMENT_COUNT });
+  const incrementGlobalCount = () => dispatch(counterAction.increment());
 
   // ローカルのカウンターをインクリメントする
   const incrementLocalCount = () => setCount((state) => state + 1);
 
   // ヘッダーにボタンを描画する
-  const attachHeaderContent = () =>
-    dispatch({
-      type: ATTACH_HEADER_CONTENT,
-      content: <Button onClick={incrementLocalCount}>Increment local count</Button>,
-    });
+  const setHeaderSubtitle = () => dispatch(headerAction.setSubtitle(getRandomString()));
 
   // ヘッダーからボタンを削除する
-  const detachHeaderContent = () => dispatch({ type: DETACH_HEADER_CONTENT });
-
-  // アンマウント時に呼ばれ、ヘッダーからボタンを削除する
-  useEffect(() => detachHeaderContent as any, []);
+  const unsetHeaderSubtitle = () => dispatch(headerAction.unsetSubtitle());
 
   return (
     <div className="page">
@@ -51,9 +42,9 @@ function Page1() {
       <Divider></Divider>
 
       <div className="page-section">
-        <h3 className="page-section-title">Attach Header Content</h3>
-        <Button onClick={attachHeaderContent}>Attach button</Button>
-        <Button onClick={detachHeaderContent}>Detach button</Button>
+        <h3 className="page-section-title">Set Header Subtitle</h3>
+        <Button onClick={setHeaderSubtitle}>Set random subtitle</Button>
+        <Button onClick={unsetHeaderSubtitle}>Unset subtitle</Button>
       </div>
     </div>
   );

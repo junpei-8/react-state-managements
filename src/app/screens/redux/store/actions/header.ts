@@ -1,17 +1,32 @@
-export const ATTACH_HEADER_CONTENT = 'ATTACH_HEADER_CONTENT' as const;
-export const DETACH_HEADER_CONTENT = 'DETACH_HEADER_CONTENT' as const;
+import { ActionFactory } from './actions';
+
+const KEY = 'header';
+export const SET_SUBTITLE = `${KEY}/set-subtitle` as const;
+export const UNSET_SUBTITLE = `${KEY}/unset-subtitle` as const;
+export const ATTACH_CONTENT = `${KEY}/attach-content` as const;
+export const DETACH_CONTENT = `${KEY}/detach-content` as const;
 
 export type HeaderState = {
+  subtitle: string;
   content: JSX.Element | null;
 };
 
-export const attachHeaderContent = (content: HeaderState['content']) => ({
-  type: ATTACH_HEADER_CONTENT,
-  content,
-});
+export const headerAction = {
+  setSubtitle(subtitle: HeaderState['subtitle']) {
+    return { type: SET_SUBTITLE, subtitle };
+  },
 
-export const detachHeaderContent = () => ({
-  type: DETACH_HEADER_CONTENT,
-});
+  unsetSubtitle() {
+    return { type: UNSET_SUBTITLE };
+  },
 
-export type HeaderAction = ReturnType<typeof attachHeaderContent | typeof detachHeaderContent>;
+  attachContent(content: HeaderState['content']) {
+    return { type: ATTACH_CONTENT, content };
+  },
+
+  detachContent() {
+    return { type: DETACH_CONTENT };
+  },
+} as const;
+
+export type HeaderAction = ActionFactory<typeof headerAction>;

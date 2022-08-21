@@ -14,9 +14,10 @@ import { State } from './store';
 const TITLE = 'RTK' as const;
 
 function RTK() {
-  console.log('Render RTK App');
+  console.log(`Render ${TITLE} App`);
 
   const counter = useSelector((state: State) => state.counter);
+  const headerSubtitle = useSelector((state: State) => state.header.subtitle);
   const headerContent = useSelector((state: State) => state.header.content);
 
   return (
@@ -24,7 +25,10 @@ function RTK() {
       <AppBar position="static" className="header">
         <Toolbar>
           <DrawerButton />
-          <h2 className="header-heading">{TITLE}</h2>
+          <h2 className="header-title">
+            {TITLE}
+            <span className="header-subtitle">{headerSubtitle}</span>
+          </h2>
           {headerContent}
         </Toolbar>
       </AppBar>

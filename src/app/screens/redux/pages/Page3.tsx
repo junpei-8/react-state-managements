@@ -1,47 +1,42 @@
-import { Button, Divider, TextField } from '@mui/material';
-import { FormEvent, useEffect, useLayoutEffect, useState } from 'react';
+import { Button, Divider, Switch } from '@mui/material';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { printLine } from '@/utils';
-import { Dispatch } from '../store/actions';
-import { INCREMENT_COUNT } from '../store/actions/counter';
-import { ATTACH_HEADER_CONTENT, DETACH_HEADER_CONTENT } from '../store/actions/header';
+import { Dispatch, counterAction, headerAction } from '../store/actions';
 import { State } from '../store/reducers';
 
 function Page3() {
   console.log('Render Page 3');
   printLine('yellow');
 
+  const [switchState, setSwitchState] = useState(false);
+
   const dispatch = useDispatch<Dispatch>();
 
   const headerContent = useSelector((state: State) => state.header.content);
 
-  const [text, setText] = useState('');
-
   // グローバルなカウンターをインクリメントする
-  const incrementGlobalCount = () => dispatch({ type: INCREMENT_COUNT });
+  const incrementGlobalCount = () => dispatch(counterAction.increment());
 
-  // テキストフィールドに変更があった場合に発火する
-  const onChangeTextField = ({ target }: FormEvent) => setText((target as HTMLInputElement).value);
+  // ローカルのカウンターをインクリメントする
+  const toggleSwitch = () => setSwitchState((state) => !state);
 
-  // ヘッダーにテキストフィールドを描画する
+  // ヘッダーにスイッチを描画する
   const attachHeaderContent = () =>
-    dispatch({
-      type: ATTACH_HEADER_CONTENT,
-      content: <TextField label="Text field" variant="filled" value={text} onInput={onChangeTextField} />,
-    });
+    dispatch(headerAction.attachContent(<Switch checked={switchState} onChange={toggleSwitch} />));
 
-  // "text"状態に変更があった場合、再度アタッチすることで、その変更を伝えることが可能
+  // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能
   // ただし、不要なレンダリングが増えてしまう
   useLayoutEffect(() => {
     if (headerContent) {
       attachHeaderContent();
     }
-  }, [text]);
+  }, [switchState]);
 
-  // ヘッダーにあるテキストフィールドを削除する
-  const detachHeaderContent = () => dispatch({ type: DETACH_HEADER_CONTENT });
+  // ヘッダーからスイッチを削除する
+  const detachHeaderContent = () => dispatch(headerAction.detachContent());
 
-  // アンマウント時に呼ばれ、テキストフィールドを削除する
+  // アンマウント時に呼ばれ、ヘッダーからスイッチを削除する
   useEffect(() => detachHeaderContent as any, []);
 
   return (
@@ -54,23 +49,17 @@ function Page3() {
       <Divider></Divider>
 
       <div className="page-section">
-        <h3 className="page-section-title">Local textfield</h3>
-        <TextField
-          className="page-section-content"
-          autoComplete="false"
-          label="Text field"
-          variant="outlined"
-          value={text}
-          onInput={onChangeTextField}
-        />
+        <h3 className="page-section-title">Local Switch</h3>
+        <span className="page-section-label">{`${switchState}`}</span>
+        <Switch checked={switchState} onChange={toggleSwitch} />
       </div>
 
       <Divider></Divider>
 
       <div className="page-section">
         <h3 className="page-section-title">Attach Header Content</h3>
-        <Button onClick={attachHeaderContent}>Attach textfield</Button>
-        <Button onClick={detachHeaderContent}>Detach textfield</Button>
+        <Button onClick={attachHeaderContent}>Attach switch</Button>
+        <Button onClick={detachHeaderContent}>Detach switch</Button>
       </div>
     </div>
   );

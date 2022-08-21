@@ -1,14 +1,19 @@
-export const INCREMENT_COUNT = 'INCREMENT_COUNT' as const;
-export const DECREMENT_COUNT = 'DECREMENT_COUNT' as const;
+import { ActionFactory } from './actions';
+
+const KEY = 'count';
+export const INCREMENT = `${KEY}/increment` as const;
+export const DECREMENT = `${KEY}/decrement` as const;
 
 export type CounterState = number;
 
-export const incrementCount = () => ({
-  type: INCREMENT_COUNT,
-});
+export const counterAction = {
+  increment() {
+    return { type: INCREMENT };
+  },
 
-export const decrementCount = () => ({
-  type: DECREMENT_COUNT,
-});
+  decrement() {
+    return { type: DECREMENT };
+  },
+} as const;
 
-export type CounterAction = ReturnType<typeof incrementCount | typeof decrementCount>;
+export type CounterAction = ActionFactory<typeof counterAction>;

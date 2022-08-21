@@ -14,9 +14,10 @@ import { State } from './store/reducers';
 const TITLE = 'Redux' as const;
 
 function Redux() {
-  console.log('Render Redux App');
+  console.log(`Render ${TITLE} App`);
 
   const counter = useSelector((state: State) => state.counter);
+  const headerSubtitle = useSelector((state: State) => state.header.subtitle);
   const headerContent = useSelector((state: State) => state.header.content);
 
   return (
@@ -24,18 +25,16 @@ function Redux() {
       <AppBar position="static" className="header">
         <Toolbar>
           <DrawerButton />
-          <h2 className="header-heading">{TITLE}</h2>
+          <h2 className="header-title">
+            {TITLE}
+            <span className="header-subtitle">{headerSubtitle}</span>
+          </h2>
           {headerContent}
         </Toolbar>
       </AppBar>
 
       <main>
-        <Heading
-          title={TITLE}
-          icon={ReduxLogo}
-          iconColor="#764ABC"
-          iconLink="https://react-redux.js.org/introduction/getting-started"
-        />
+        <Heading title={TITLE} icon={ReduxLogo} iconColor="#764ABC" iconLink="https://react-redux.js.org" />
 
         <PageFlow>
           <span>{counter}</span>

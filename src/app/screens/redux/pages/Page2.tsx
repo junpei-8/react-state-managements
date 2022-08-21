@@ -1,47 +1,31 @@
-import { Button, Divider, Switch } from '@mui/material';
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Button, Divider } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { printLine } from '@/utils';
-import { Dispatch } from '../store/actions';
-import { INCREMENT_COUNT } from '../store/actions/counter';
-import { ATTACH_HEADER_CONTENT, DETACH_HEADER_CONTENT } from '../store/actions/header';
-import { State } from '../store/reducers';
+import { Dispatch, counterAction, headerAction } from '../store/actions';
 
 function Page2() {
   console.log('Render Page 2');
   printLine('magenta');
 
-  const [switchState, setSwitchState] = useState(false);
-
   const dispatch = useDispatch<Dispatch>();
 
-  const headerContent = useSelector((state: State) => state.header.content);
+  const [count, setCount] = useState(0);
 
   // グローバルなカウンターをインクリメントする
-  const incrementGlobalCount = () => dispatch({ type: INCREMENT_COUNT });
+  const incrementGlobalCount = () => dispatch(counterAction.increment());
 
   // ローカルのカウンターをインクリメントする
-  const toggleSwitch = () => setSwitchState((state) => !state);
+  const incrementLocalCount = () => setCount((state) => state + 1);
 
-  // ヘッダーにスイッチを描画する
+  // ヘッダーにボタンを描画する
   const attachHeaderContent = () =>
-    dispatch({
-      type: ATTACH_HEADER_CONTENT,
-      content: <Switch checked={switchState} onChange={toggleSwitch} />,
-    });
+    dispatch(headerAction.attachContent(<Button onClick={incrementLocalCount}>Increment local count</Button>));
 
-  // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能
-  // ただし、不要なレンダリングが増えてしまう
-  useLayoutEffect(() => {
-    if (headerContent) {
-      attachHeaderContent();
-    }
-  }, [switchState]);
+  // ヘッダーからボタンを削除する
+  const detachHeaderContent = () => dispatch(headerAction.detachContent());
 
-  // ヘッダーからスイッチを削除する
-  const detachHeaderContent = () => dispatch({ type: DETACH_HEADER_CONTENT });
-
-  // アンマウント時に呼ばれ、ヘッダーからスイッチを削除する
+  // アンマウント時に呼ばれ、ヘッダーからボタンを削除する
   useEffect(() => detachHeaderContent as any, []);
 
   return (
@@ -54,17 +38,17 @@ function Page2() {
       <Divider></Divider>
 
       <div className="page-section">
-        <h3 className="page-section-title">Local Switch</h3>
-        <span className="page-section-label">{`${switchState}`}</span>
-        <Switch checked={switchState} onChange={toggleSwitch} />
+        <h3 className="page-section-title">Local Counter</h3>
+        <span className="page-section-label">{count}</span>
+        <Button onClick={incrementLocalCount}>Count</Button>
       </div>
 
       <Divider></Divider>
 
       <div className="page-section">
         <h3 className="page-section-title">Attach Header Content</h3>
-        <Button onClick={attachHeaderContent}>Attach switch</Button>
-        <Button onClick={detachHeaderContent}>Detach switch</Button>
+        <Button onClick={attachHeaderContent}>Attach button</Button>
+        <Button onClick={detachHeaderContent}>Detach button</Button>
       </div>
     </div>
   );

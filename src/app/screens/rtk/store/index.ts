@@ -1,15 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { counterSlice } from './counter';
-import { headerSlice } from './header';
+import { counterReducer } from './counter';
+import { headerReducer } from './header';
+
+export * from './counter';
+export * from './header';
 
 export type State = ReturnType<typeof store['getState']>;
 export type Dispatch = typeof store.dispatch;
 
 const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer,
-    header: headerSlice.reducer,
+    counter: counterReducer,
+    header: headerReducer,
   },
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
