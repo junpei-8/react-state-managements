@@ -2,26 +2,28 @@ import { Button, Divider } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { printLine, getRandomString } from '@/utils';
-import { Dispatch, counterAction, headerAction } from '../store/actions';
+import { counterAction, headerAction, Dispatch } from '../store/actions';
 
 function Page1() {
   console.log('Render Page 1');
   printLine('cyan');
 
-  const dispatch = useDispatch<Dispatch>();
-
+  // ローカルのカウンターの状態とセッターを作成
   const [count, setCount] = useState(0);
 
-  // グローバルなカウンターをインクリメントする
+  // ローカルのカウンターをインクリメントする
+  const incrementCount = () => setCount((state) => state + 1);
+
+  // 共通の状態を更新するために必要な関数を取得
+  const dispatch = useDispatch<Dispatch>();
+
+  // 共通のカウンターをインクリメントする
   const incrementGlobalCount = () => dispatch(counterAction.increment());
 
-  // ローカルのカウンターをインクリメントする
-  const incrementLocalCount = () => setCount((state) => state + 1);
-
-  // ヘッダーにボタンを描画する
+  // ヘッダーにサブタイトルを表示する
   const setHeaderSubtitle = () => dispatch(headerAction.setSubtitle(getRandomString()));
 
-  // ヘッダーからボタンを削除する
+  // ヘッダーからサブタイトルを削除する
   const unsetHeaderSubtitle = () => dispatch(headerAction.unsetSubtitle());
 
   return (
@@ -36,7 +38,7 @@ function Page1() {
       <div className="page-section">
         <h3 className="page-section-title">Local Counter</h3>
         <span className="page-section-label">{count}</span>
-        <Button onClick={incrementLocalCount}>Count</Button>
+        <Button onClick={incrementCount}>Count</Button>
       </div>
 
       <Divider></Divider>

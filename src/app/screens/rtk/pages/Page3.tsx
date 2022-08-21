@@ -8,34 +8,36 @@ function Page3() {
   console.log('Render Page 3');
   printLine('yellow');
 
+  // ローカルのスイッチの状態とセッターを生成
   const [switchState, setSwitchState] = useState(false);
 
+  // ローカルのスイッチの状態を切り替える
+  const toggleSwitch = () => setSwitchState((state) => !state);
+
+  // 共通の状態を更新するために必要な関数を取得
   const dispatch = useDispatch<Dispatch>();
 
-  const headerContent = useSelector((state: State) => state.header.content);
-
-  // グローバルなカウンターをインクリメントする
+  // 共通のカウンターをインクリメントする
   const incrementGlobalCount = () => dispatch(counterAction.increment());
 
-  // ローカルのカウンターをインクリメントする
-  const toggleSwitch = () => setSwitchState((state) => !state);
+  const headerContent = useSelector((state: State) => state.header.content);
 
   // ヘッダーにスイッチを描画する
   const attachHeaderContent = () =>
     dispatch(headerAction.attachContent(<Switch checked={switchState} onChange={toggleSwitch} />));
 
-  // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能
-  // ただし、不要なレンダリングが増えてしまう
+  // ヘッダーからスイッチを削除する
+  const detachHeaderContent = () => dispatch(headerAction.detachContent());
+
+  // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能だが、
+  // その際に不要なレンダリングが増えてしまうので注意
   useLayoutEffect(() => {
     if (headerContent) {
       attachHeaderContent();
     }
   }, [switchState]);
 
-  // ヘッダーからスイッチを削除する
-  const detachHeaderContent = () => dispatch(headerAction.detachContent());
-
-  // アンマウント時に呼ばれ、ヘッダーからスイッチを削除する
+  // アンマウント時に発火し、ヘッダーからスイッチを削除する
   useEffect(() => detachHeaderContent as any, []);
 
   return (

@@ -27,7 +27,7 @@ function Redux() {
           <DrawerButton />
           <h2 className="header-title">
             {TITLE}
-            <span className="header-subtitle">{headerSubtitle}</span>
+            <span className="header-subtitle">{headerSubtitle ? `-\u3000${headerSubtitle}` : null}</span>
           </h2>
           {headerContent}
         </Toolbar>

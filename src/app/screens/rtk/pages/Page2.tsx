@@ -8,24 +8,26 @@ function Page2() {
   console.log('Render Page 2');
   printLine('magenta');
 
-  const dispatch = useDispatch<Dispatch>();
-
+  // ローカルのカウンターの状態とセッターを作成
   const [count, setCount] = useState(0);
 
-  // グローバルなカウンターをインクリメントする
-  const incrementGlobalCount = () => dispatch(counterAction.increment());
-
   // ローカルのカウンターをインクリメントする
-  const incrementLocalCount = () => setCount((state) => state + 1);
+  const incrementCount = () => setCount((state) => state + 1);
+
+  // 共通の状態を更新するために必要な関数を取得
+  const dispatch = useDispatch<Dispatch>();
+
+  // 共通のカウンターをインクリメントする
+  const incrementGlobalCount = () => dispatch(counterAction.increment());
 
   // ヘッダーにボタンを描画する
   const attachHeaderContent = () =>
-    dispatch(headerAction.attachContent(<Button onClick={incrementLocalCount}>Increment local count</Button>));
+    dispatch(headerAction.attachContent(<Button onClick={incrementCount}>Increment local count</Button>));
 
   // ヘッダーからボタンを削除する
   const detachHeaderContent = () => dispatch(headerAction.detachContent());
 
-  // アンマウント時に呼ばれ、ヘッダーからボタンを削除する
+  // アンマウント時に発火し、ヘッダーからボタンを削除する
   useEffect(() => detachHeaderContent as any, []);
 
   return (
@@ -40,7 +42,7 @@ function Page2() {
       <div className="page-section">
         <h3 className="page-section-title">Local Counter</h3>
         <span className="page-section-label">{count}</span>
-        <Button onClick={incrementLocalCount}>Count</Button>
+        <Button onClick={incrementCount}>Count</Button>
       </div>
 
       <Divider></Divider>

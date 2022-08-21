@@ -9,16 +9,16 @@ function Page2() {
   console.log('Render Page 1');
   printLine('cyan');
 
-  // ローカルのカウンターの状態を作成
+  // ローカルのカウンターの状態とセッターを作成
   const [count, setCount] = useState(0);
 
   // ローカルのカウンターをインクリメントする
-  const incrementLocalCount = () => setCount((state) => state + 1);
+  const incrementCount = () => setCount((state) => state + 1);
 
-  // グローバルなカウンターの状態を更新するセッターを取得
+  // 共通のカウンターの状態を更新するセッターを取得
   const setGlobalCount = useSetRecoilState(counterState);
 
-  // グローバルなカウンターをインクリメントする
+  // 共通のカウンターをインクリメントする
   const incrementGlobalCount = () => setGlobalCount((state) => state + 1);
 
   // ヘッダーの状態を更新するセッターを取得
@@ -42,7 +42,7 @@ function Page2() {
       <div className="page-section">
         <h3 className="page-section-title">Local Counter</h3>
         <span className="page-section-label">{count}</span>
-        <Button onClick={incrementLocalCount}>Count</Button>
+        <Button onClick={incrementCount}>Count</Button>
       </div>
 
       <Divider></Divider>

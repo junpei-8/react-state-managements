@@ -9,16 +9,16 @@ function Page3() {
   console.log('Render Page 3');
   printLine('yellow');
 
-  // ローカルのスイッチの状態
+  // ローカルのスイッチの状態とセッターを作成
   const [switchState, setSwitchState] = useState(false);
 
   // ローカルのスイッチの状態を切り替える
   const toggleSwitch = () => setSwitchState((state) => !state);
 
-  // グローバルなカウンターの状態を更新するセッターを取得
+  // 共通のカウンターの状態を更新するセッターを取得
   const setGlobalCount = useSetRecoilState(counterState);
 
-  // グローバルなカウンターをインクリメントする
+  // 共通のカウンターをインクリメントする
   const incrementGlobalCount = () => setGlobalCount((state) => state + 1);
 
   // ヘッダーの状態とヘッダーの状態を更新するセッターを取得
@@ -34,8 +34,8 @@ function Page3() {
   // ヘッダーからボタンを削除する
   const detachHeaderContent = () => setHeaderState((state) => ({ ...state, content: null }));
 
-  // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能
-  // ただし、不要なレンダリングが増えてしまうので注意
+  // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能だが、
+  // その際に不要なレンダリングが増えてしまうので注意
   useLayoutEffect(() => {
     if (header.content) {
       attachHeaderContent();
