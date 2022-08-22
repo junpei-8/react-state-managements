@@ -11,7 +11,7 @@ function Home() {
       <AppBar position="static">
         <Toolbar>
           <DrawerButton />
-          <h2 className="header-heading">Home</h2>
+          <h2 className="header-title">Home</h2>
         </Toolbar>
       </AppBar>
 
