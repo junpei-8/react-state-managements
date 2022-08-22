@@ -1,5 +1,8 @@
 import HomeIcon from '@mui/icons-material/Home';
+
 import { lazy } from 'react';
+import { ReactComponent as ValtioLogo } from './assets/valtio';
+import { ReactComponent as ZustandLogo } from './assets/zustand';
 import { ReactComponent as RecoilLogo } from './assets/recoil.svg';
 import { ReactComponent as ReduxLogo } from './assets/redux.svg';
 import Home from './screens/home/Home';
@@ -40,6 +43,12 @@ export const routes: Routes = [
     path: '/zustand',
     name: 'Zustand',
     component: lazy(() => import('./screens/zustand/ZustandApp')),
-    icon: RecoilLogo,
+    icon: ZustandLogo,
+  },
+  {
+    path: '/valtio',
+    name: 'Valtio',
+    component: lazy(() => import('./screens/valtio/ValtioApp')),
+    icon: ValtioLogo,
   },
 ];
