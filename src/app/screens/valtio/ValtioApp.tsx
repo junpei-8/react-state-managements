@@ -7,16 +7,16 @@ import PageRoutes from '@/components/PageRoutes';
 import Page1 from './pages/Page1';
 import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
-import { useCounterStore, useHeaderStore } from './store';
+import { counterState, headerState } from './states';
+import { useSnapshot } from 'valtio';
 
 const TITLE = 'Valtio' as const;
 
 function Valtio() {
   console.log(`Render ${TITLE} App`);
 
-  const counter = useCounterStore(); // 状態を抽出せずに取得できる
-  const headerSubtitle = useHeaderStore((state) => state.subtitle);
-  const headerContent = useHeaderStore((state) => state.content);
+  const counter = useSnapshot(counterState);
+  const header = useSnapshot(headerState);
 
   return (
     <>
@@ -25,9 +25,9 @@ function Valtio() {
           <DrawerButton />
           <h2 className="header-title">
             {TITLE}
-            <span className="header-subtitle">{headerSubtitle ? `-\u3000${headerSubtitle}` : null}</span>
+            <span className="header-subtitle">{header.subtitle}</span>
           </h2>
-          {headerContent}
+          {header.clonedContent}
         </Toolbar>
       </AppBar>
 

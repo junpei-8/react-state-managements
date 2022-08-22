@@ -1,7 +1,7 @@
 import { Button, Divider } from '@mui/material';
 import { useState } from 'react';
 import { printLine, getRandomString } from '@/utils';
-import { useCounterStore, useHeaderStore } from '../store';
+import { counterState, headerState } from '../states';
 
 function Page1() {
   console.log('Render Page 1');
@@ -13,20 +13,14 @@ function Page1() {
   // ローカルのカウンターをインクリメントする
   const incrementCount = () => setCount((state) => state + 1);
 
-  // 共通のカウンターの状態を更新するセッターを取得
-  const globalCounter = useCounterStore();
-
   // 共通のカウンターをインクリメントする
-  const incrementGlobalCount = () => globalCounter.increment();
-
-  // ヘッダーの状態を更新するセッターを取得
-  const headerState = useHeaderStore();
+  const incrementGlobalCount = () => counterState.value++;
 
   // ヘッダーにサブタイトルを表示する
-  const setHeaderSubtitle = () => headerState.setSubtitle(getRandomString());
+  const setHeaderSubtitle = () => (headerState.subtitle = getRandomString());
 
   // ヘッダーからサブタイトルを削除する
-  const unsetHeaderSubtitle = () => headerState.unsetSubtitle();
+  const unsetHeaderSubtitle = () => (headerState.subtitle = '');
 
   return (
     <div className="page">

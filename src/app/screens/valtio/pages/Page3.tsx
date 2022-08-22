@@ -1,7 +1,7 @@
 import { Button, Divider, Switch } from '@mui/material';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { printLine } from '@/utils';
-import { useCounterStore, useHeaderStore } from '../store';
+import { counterState, headerState } from '../states';
 
 function Page3() {
   console.log('Render Page 3');
@@ -13,20 +13,14 @@ function Page3() {
   // ローカルのスイッチの状態を切り替える
   const toggleSwitch = () => setSwitchState((state) => !state);
 
-  // 共通のカウンターの状態を更新するセッターを取得
-  const globalCounter = useCounterStore();
-
   // 共通のカウンターをインクリメントする
-  const incrementGlobalCount = () => globalCounter.increment();
+  const incrementGlobalCount = () => counterState.value++;
 
-  // ヘッダーの状態を取得
-  const headerState = useHeaderStore();
+  // ヘッダーにスイッチを描画する
+  const attachHeaderContent = () => (headerState.content = <Switch checked={switchState} onChange={toggleSwitch} />);
 
-  // ヘッダーにボタンを描画する
-  const attachHeaderContent = () => headerState.attachContent(<Switch checked={switchState} onChange={toggleSwitch} />);
-
-  // ヘッダーからボタンを削除する
-  const detachHeaderContent = () => headerState.detachContent();
+  // ヘッダーからスイッチを削除する
+  const detachHeaderContent = () => (headerState.content = null);
 
   // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能だが、
   // その際に不要なレンダリングが増えてしまうので注意

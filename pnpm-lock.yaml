@@ -17,6 +17,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   prettier: ^2.7.1
   prettier-plugin-jsdoc: ^0.3.38
+  proxy-memoize: ^1.2.0
   react: ^18.2.0
   react-dom: ^18.2.0
   react-redux: ^8.0.2
@@ -35,6 +36,7 @@ dependencies:
   '@mui/icons-material': 5.8.4_uxiimzjvigalxf5okfzuivgjva
   '@mui/material': 5.10.1_sqzxty2p7kxc2tmue4tecplwku
   '@reduxjs/toolkit': 1.8.5_kkwg4cbsojnjnupd3btipussee
+  proxy-memoize: 1.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.0.2_ps4ywwwjjeajezffxxirqk36qa
@@ -2563,6 +2565,12 @@ packages:
 
   /proxy-compare/2.3.0:
     resolution: {integrity: sha512-c3L2CcAi7f7pvlD0D7xsF+2CQIW8C3HaYx2Pfgq8eA4HAl3GAH6/dVYsyBbYF/0XJs2ziGLrzmz5fmzPm6A0pQ==}
+    dev: false
+
+  /proxy-memoize/1.2.0:
+    resolution: {integrity: sha512-0heYEZb4yMfhdduz8T+BPJOCKGukc81WRJaYF0k6ZsJz/NkPLhGFqe6OLdiZURr5kC1byps5wdqLN6DC2tYAFw==}
+    dependencies:
+      proxy-compare: 2.3.0
     dev: false
 
   /punycode/2.1.1:

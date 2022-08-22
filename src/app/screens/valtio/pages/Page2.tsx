@@ -1,7 +1,7 @@
 import { Button, Divider } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { printLine } from '@/utils';
-import { useCounterStore, useHeaderStore } from '../store';
+import { counterState, headerState } from '../states';
 
 function Page2() {
   console.log('Render Page 2');
@@ -13,21 +13,15 @@ function Page2() {
   // ローカルのカウンターをインクリメントする
   const incrementCount = () => setCount((state) => state + 1);
 
-  // 共通のカウンターの状態を更新するセッターを取得
-  const globalCounter = useCounterStore();
-
   // 共通のカウンターをインクリメントする
-  const incrementGlobalCount = () => globalCounter.increment();
-
-  // ヘッダーの状態を取得
-  const headerState = useHeaderStore();
+  const incrementGlobalCount = () => counterState.value++;
 
   // ヘッダーにボタンを描画する
   const attachHeaderContent = () =>
-    headerState.attachContent(<Button onClick={incrementCount}>Increment local count</Button>);
+    (headerState.content = <Button onClick={incrementCount}>Increment local count</Button>);
 
   // ヘッダーからボタンを削除する
-  const detachHeaderContent = () => headerState.detachContent();
+  const detachHeaderContent = () => (headerState.content = null);
 
   // アンマウント時に発火し、ヘッダーからボタンを削除する
   useEffect(() => detachHeaderContent as any, []);
