@@ -19,10 +19,6 @@ export const headerSubtitleState = selector({
   get: ({ get }) => {
     const { subtitle } = get(headerState);
 
-    if (subtitle) {
-      return `-\u3000${subtitle}`;
-    }
-
-    return null;
+    return subtitle ? `-\u3000${subtitle}` : null;
   },
 });
