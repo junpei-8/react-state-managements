@@ -1,8 +1,7 @@
 import { Button, Divider, Switch } from '@mui/material';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 import { printLine } from '@/utils';
-import { counterState, headerState } from '../states';
+import { useCounterStore, useHeaderStore } from '../store';
 
 function Page3() {
   console.log('Render Page 3');
@@ -15,28 +14,24 @@ function Page3() {
   const toggleSwitch = () => setSwitchState((state) => !state);
 
   // 共通のカウンターの状態を更新するセッターを取得
-  const setGlobalCount = useSetRecoilState(counterState);
+  const globalCounter = useCounterStore();
 
   // 共通のカウンターをインクリメントする
-  const incrementGlobalCount = () => setGlobalCount((state) => state + 1);
+  const incrementGlobalCount = () => globalCounter.increment();
 
-  // ヘッダーの状態とヘッダーの状態を更新するセッターを取得
-  const [header, setHeaderState] = useRecoilState(headerState);
+  // ヘッダーの状態を取得
+  const headerState = useHeaderStore();
 
   // ヘッダーにボタンを描画する
-  const attachHeaderContent = () =>
-    setHeaderState((state) => ({
-      ...state,
-      content: <Switch checked={switchState} onChange={toggleSwitch} />,
-    }));
+  const attachHeaderContent = () => headerState.attachContent(<Switch checked={switchState} onChange={toggleSwitch} />);
 
   // ヘッダーからボタンを削除する
-  const detachHeaderContent = () => setHeaderState((state) => ({ ...state, content: null }));
+  const detachHeaderContent = () => headerState.detachContent();
 
   // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能だが、
   // その際に不要なレンダリングが増えてしまうので注意
   useLayoutEffect(() => {
-    if (header.content) {
+    if (headerState.content) {
       attachHeaderContent();
     }
   }, [switchState]);

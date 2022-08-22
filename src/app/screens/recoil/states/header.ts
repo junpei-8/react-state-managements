@@ -6,15 +6,15 @@ export type HeaderState = {
 };
 
 export const headerState = atom<HeaderState>({
-  key: 'Counter',
+  key: 'Header',
   default: {
     subtitle: '',
     content: null,
   },
 });
 
-export const headerSubtitleState = selector({
-  key: 'CounterSubtitle',
+export const headerFormattedSubtitle = selector({
+  key: 'HeaderFormattedSubtitle',
 
   get: ({ get }) => {
     const { subtitle } = get(headerState);

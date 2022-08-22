@@ -1,8 +1,7 @@
 import { Button, Divider } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { printLine } from '@/utils';
-import { counterState, headerState } from '../states';
+import { useCounterStore, useHeaderStore } from '../store';
 
 function Page2() {
   console.log('Render Page 2');
@@ -15,23 +14,20 @@ function Page2() {
   const incrementCount = () => setCount((state) => state + 1);
 
   // 共通のカウンターの状態を更新するセッターを取得
-  const setGlobalCount = useSetRecoilState(counterState);
+  const globalCounter = useCounterStore();
 
   // 共通のカウンターをインクリメントする
-  const incrementGlobalCount = () => setGlobalCount((state) => state + 1);
+  const incrementGlobalCount = () => globalCounter.increment();
 
-  // ヘッダーの状態を更新するセッターを取得
-  const setHeaderState = useSetRecoilState(headerState);
+  // ヘッダーの状態を取得
+  const headerState = useHeaderStore();
 
   // ヘッダーにボタンを描画する
   const attachHeaderContent = () =>
-    setHeaderState((state) => ({
-      ...state,
-      content: <Button onClick={incrementCount}>Increment local count</Button>,
-    }));
+    headerState.attachContent(<Button onClick={incrementCount}>Increment local count</Button>);
 
   // ヘッダーからボタンを削除する
-  const detachHeaderContent = () => setHeaderState((state) => ({ ...state, content: null }));
+  const detachHeaderContent = () => headerState.detachContent();
 
   // アンマウント時に発火し、ヘッダーからボタンを削除する
   useEffect(() => detachHeaderContent as any, []);

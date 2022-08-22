@@ -1,24 +1,23 @@
 import { AppBar, Toolbar } from '@mui/material';
 import { Provider, useSelector } from 'react-redux';
 import { DrawerButton } from '@/DrawerButton';
-import { ReactComponent as MobXLogo } from '@/assets/mobx.svg';
+import { ReactComponent as RTKLogo } from '@/assets/redux.svg';
 import Heading from '@/components/Heading';
 import PageFlow from '@/components/PageFlow';
 import PageRoutes from '@/components/PageRoutes';
 import Page1 from './pages/Page1';
 import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
-import store from './store';
-import { State } from './store';
+import { useCounterStore, useHeaderStore } from './store';
 
-const TITLE = 'MobX' as const;
+const TITLE = 'Zustand' as const;
 
-function MobX() {
+function Zustand() {
   console.log(`Render ${TITLE} App`);
 
-  const counter = useSelector((state: State) => state.counter);
-  const headerSubtitle = useSelector((state: State) => state.header.subtitle);
-  const headerContent = useSelector((state: State) => state.header.content);
+  const counter = useCounterStore(); // 状態を抽出せずに取得できる
+  const headerSubtitle = useHeaderStore((state) => state.subtitle);
+  const headerContent = useHeaderStore((state) => state.content);
 
   return (
     <>
@@ -27,17 +26,17 @@ function MobX() {
           <DrawerButton />
           <h2 className="header-title">
             {TITLE}
-            <span className="header-subtitle">{headerSubtitle}</span>
+            <span className="header-subtitle">{headerSubtitle ? `-\u3000${headerSubtitle}` : null}</span>
           </h2>
           {headerContent}
         </Toolbar>
       </AppBar>
 
       <main>
-        <Heading title={TITLE} icon={MobXLogo} iconColor="#EA6618" iconLink="https://mobx.js.org/" />
+        <Heading title={TITLE} icon={RTKLogo} iconColor="#764ABC" iconLink="https://redux-toolkit.js.org/" />
 
         <PageFlow>
-          <span>{counter}</span>
+          <span>{counter.value}</span>
         </PageFlow>
 
         <PageRoutes page={{ 1: <Page1 />, 2: <Page2 />, 3: <Page3 /> }} />
@@ -46,12 +45,8 @@ function MobX() {
   );
 }
 
-function MobXApp() {
-  return (
-    <Provider store={store}>
-      <MobX />
-    </Provider>
-  );
+function ZustandApp() {
+  return <Zustand />;
 }
 
-export default MobXApp;
+export default ZustandApp;

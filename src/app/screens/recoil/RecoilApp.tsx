@@ -9,7 +9,7 @@ import Page1 from './pages/Page1';
 import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
 import { counterState } from './states/counter';
-import { headerState, headerSubtitleState } from './states/header';
+import { headerFormattedSubtitle, headerState, headerSubtitleState } from './states/header';
 
 const TITLE = 'Recoil' as const;
 
@@ -18,7 +18,7 @@ function Recoil() {
 
   const counter = useRecoilValue(counterState);
   const header = useRecoilValue(headerState);
-  const headerSubtitle = useRecoilValue(headerSubtitleState);
+  const headerSubtitle = useRecoilValue(headerFormattedSubtitle);
 
   return (
     <>

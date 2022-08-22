@@ -28,6 +28,7 @@ specifiers:
   typescript: ^4.6.4
   vite: ^3.0.7
   vite-plugin-svgr: ^2.2.1
+  zustand: ^4.1.1
 
 dependencies:
   '@mui/icons-material': 5.8.4_uxiimzjvigalxf5okfzuivgjva
@@ -41,6 +42,7 @@ dependencies:
   recoil: 0.7.5_biqbaboplfbrettd7655fr4n2y
   redux: 4.2.0
   vite-plugin-svgr: 2.2.1_vite@3.0.9
+  zustand: 4.1.1_react@18.2.0
 
 devDependencies:
   '@babel/core': 7.18.10
@@ -3050,3 +3052,19 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zustand/4.1.1_react@18.2.0:
+    resolution: {integrity: sha512-h4F3WMqsZgvvaE0n3lThx4MM81Ls9xebjvrABNzf5+jb3/03YjNTSgZXeyrvXDArMeV9untvWXRw1tY+ntPYbA==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false

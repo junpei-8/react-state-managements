@@ -7,7 +7,7 @@
 | Redux               |     ✅      |
 | RTK (Redux toolkit) |     ✅      |
 | Recoil              |     ✅      |
-| MobX                |             |
+| MobX                |     ❌      |
 | Zustand             |             |
 | Valtio              |             |
 

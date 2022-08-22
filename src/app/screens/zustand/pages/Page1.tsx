@@ -1,10 +1,9 @@
 import { Button, Divider } from '@mui/material';
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { printLine, getRandomString } from '@/utils';
-import { counterState, headerState } from '../states';
+import { useCounterStore, useHeaderStore } from '../store';
 
-function Page2() {
+function Page1() {
   console.log('Render Page 1');
   printLine('cyan');
 
@@ -15,19 +14,19 @@ function Page2() {
   const incrementCount = () => setCount((state) => state + 1);
 
   // 共通のカウンターの状態を更新するセッターを取得
-  const setGlobalCount = useSetRecoilState(counterState);
+  const globalCounter = useCounterStore();
 
   // 共通のカウンターをインクリメントする
-  const incrementGlobalCount = () => setGlobalCount((state) => state + 1);
+  const incrementGlobalCount = () => globalCounter.increment();
 
   // ヘッダーの状態を更新するセッターを取得
-  const setHeaderState = useSetRecoilState(headerState);
+  const headerState = useHeaderStore();
 
   // ヘッダーにサブタイトルを表示する
-  const setHeaderSubtitle = () => setHeaderState((state) => ({ ...state, subtitle: getRandomString() }));
+  const setHeaderSubtitle = () => headerState.setSubtitle(getRandomString());
 
   // ヘッダーからサブタイトルを削除する
-  const unsetHeaderSubtitle = () => setHeaderState((state) => ({ ...state, subtitle: '' }));
+  const unsetHeaderSubtitle = () => headerState.unsetSubtitle();
 
   return (
     <div className="page">
@@ -55,4 +54,4 @@ function Page2() {
   );
 }
 
-export default Page2;
+export default Page1;

@@ -1,6 +1,5 @@
 import HomeIcon from '@mui/icons-material/Home';
 import { lazy } from 'react';
-import { ReactComponent as MobXLogo } from './assets/mobx.svg';
 import { ReactComponent as RecoilLogo } from './assets/recoil.svg';
 import { ReactComponent as ReduxLogo } from './assets/redux.svg';
 import Home from './screens/home/Home';
@@ -38,9 +37,9 @@ export const routes: Routes = [
     icon: RecoilLogo,
   },
   {
-    path: '/mobx',
-    name: 'MobX',
-    component: lazy(() => import('./screens/mobx/MobXApp')),
-    icon: MobXLogo,
+    path: '/zustand',
+    name: 'Zustand',
+    component: lazy(() => import('./screens/zustand/ZustandApp')),
+    icon: RecoilLogo,
   },
 ];
