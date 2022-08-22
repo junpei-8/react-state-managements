@@ -8,8 +8,8 @@
 | RTK (Redux toolkit) |     ✅      |
 | Recoil              |     ✅      |
 | MobX                |     ❌      |
-| Zustand             |             |
-| Valtio              |             |
+| Zustand             |     ✅      |
+| Valtio              |     ✅      |
 
 ## Using
 

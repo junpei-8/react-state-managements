@@ -18,7 +18,7 @@ function Heading({ title, icon: Icon, iconLink, iconColor }: Props) {
         </a>
 
         <a className={style.iconLink} href={iconLink} target="_blank" rel="noreferrer">
-          <Icon className={style.icon} style={{ color: iconColor }} />
+          <Icon style={{ color: iconColor }} />
         </a>
 
         <a className={style.logoLink} href="https://vitejs.dev" target="_blank" rel="noreferrer" title="Vite link">

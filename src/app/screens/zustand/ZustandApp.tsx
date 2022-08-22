@@ -1,7 +1,6 @@
 import { AppBar, Toolbar } from '@mui/material';
-import { Provider, useSelector } from 'react-redux';
 import { DrawerButton } from '@/DrawerButton';
-import { ReactComponent as RTKLogo } from '@/assets/redux.svg';
+import { ReactComponent as ZustandLogo } from '@/assets/zustand';
 import Heading from '@/components/Heading';
 import PageFlow from '@/components/PageFlow';
 import PageRoutes from '@/components/PageRoutes';
@@ -16,7 +15,7 @@ function Zustand() {
   console.log(`Render ${TITLE} App`);
 
   const counter = useCounterStore(); // 状態を抽出せずに取得できる
-  const headerSubtitle = useHeaderStore((state) => state.subtitle);
+  const headerSubtitle = useHeaderStore((state) => state.computed.formattedSubtitle);
   const headerContent = useHeaderStore((state) => state.content);
 
   return (
@@ -26,14 +25,14 @@ function Zustand() {
           <DrawerButton />
           <h2 className="header-title">
             {TITLE}
-            <span className="header-subtitle">{headerSubtitle ? `-\u3000${headerSubtitle}` : null}</span>
+            <span className="header-subtitle">{headerSubtitle}</span>
           </h2>
           {headerContent}
         </Toolbar>
       </AppBar>
 
       <main>
-        <Heading title={TITLE} icon={RTKLogo} iconColor="#764ABC" iconLink="https://redux-toolkit.js.org/" />
+        <Heading title={TITLE} icon={ZustandLogo} iconColor="#4caf50" iconLink="https://zustand-demo.pmnd.rs/" />
 
         <PageFlow>
           <span>{counter.value}</span>

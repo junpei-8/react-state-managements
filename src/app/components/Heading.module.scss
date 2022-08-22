@@ -15,11 +15,21 @@
   padding: 24px;
 }
 
-.icon,
+.iconLink svg,
 .reactLogo,
 .viteLogo {
   will-change: filter;
   transition: filter 160ms ease-in-out;
+}
+
+.iconLink svg {
+  width: 96px;
+  height: 96px;
+  margin: 0 16px;
+
+  &:hover {
+    filter: drop-shadow(0 0 24px currentColor);
+  }
 }
 
 .reactLogo,
@@ -32,16 +42,6 @@
 }
 .viteLogo:hover {
   filter: drop-shadow(0 0 16px #646cffaa);
-}
-
-.icon {
-  width: 96px;
-  height: 96px;
-  margin: 0 16px;
-
-  &:hover {
-    filter: drop-shadow(0 0 24px currentColor);
-  }
 }
 
 .heading {

@@ -1,5 +1,5 @@
-// textarea をヘッダーに描画するバージョン
-// switch とどっちを取るか迷ったが、見栄え的に switch を取った
+// ! textarea をヘッダーに描画するバージョン
+// ! switch とどっちを取るか迷ったが、見栄え的とわかりやすさ的に switch を取った
 
 import { Button, Divider, TextField } from '@mui/material';
 import { FormEvent, useEffect, useLayoutEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import { printLine } from '@/utils';
 import { counterAction, Dispatch, headerAction } from '../store/actions';
 import { State } from '../store/reducers';
 
-function Page3() {
+function Page4() {
   console.log('Render Page 3');
   printLine('yellow');
 
@@ -78,4 +78,4 @@ function Page3() {
   );
 }
 
-export default Page3;
+export default Page4;

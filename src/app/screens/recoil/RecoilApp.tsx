@@ -9,7 +9,7 @@ import Page1 from './pages/Page1';
 import Page2 from './pages/Page2';
 import Page3 from './pages/Page3';
 import { counterState } from './states/counter';
-import { headerFormattedSubtitle, headerState, headerSubtitleState } from './states/header';
+import { headerFormattedSubtitle, headerState } from './states/header';
 
 const TITLE = 'Recoil' as const;
 
@@ -34,7 +34,12 @@ function Recoil() {
       </AppBar>
 
       <main>
-        <Heading title={TITLE} icon={RecoilLogo} iconColor="rgba(255, 255, 255, 0.6)" iconLink="https://mobx.js.org/" />
+        <Heading
+          title={TITLE}
+          icon={RecoilLogo}
+          iconColor="rgba(255, 255, 255, 0.6)"
+          iconLink="https://recoiljs.org/"
+        />
 
         <PageFlow>
           <span>{counter}</span>

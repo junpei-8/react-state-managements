@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { printLine, getRandomString } from '@/utils';
 import { counterAction, headerAction, Dispatch } from '../store';
 
-function Page2() {
+function Page1() {
   console.log('Render Page 1');
   printLine('cyan');
 
@@ -52,4 +52,4 @@ function Page2() {
   );
 }
 
-export default Page2;
+export default Page1;

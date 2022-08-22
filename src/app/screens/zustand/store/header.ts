@@ -8,20 +8,24 @@ type HeaderStore = Readonly<{
   content: JSX.Element | null;
   attachContent(content: JSX.Element): void;
   detachContent(): void;
-  formattedSubtitle: string;
+
+  computed: {
+    formattedSubtitle: string;
+  };
 }>;
 
-export const useHeaderStore = create<HeaderStore>((set) => ({
+export const useHeaderStore = create<HeaderStore>((set, get) => ({
   subtitle: '',
-  setSubtitle: (subtitle: string) => set(() => ({ subtitle })),
+  setSubtitle: (subtitle: string) => set(() => ({ subtitle: subtitle })),
   unsetSubtitle: () => set(() => ({ subtitle: '' })),
 
   content: null,
   attachContent: (content: JSX.Element) => set(() => ({ content })),
   detachContent: () => set(() => ({ content: null })),
 
-  get formattedSubtitle() {
-    const subtitle = this.subtitle;
-    return subtitle ? `-\u3000${subtitle}` : '';
+  computed: {
+    get formattedSubtitle() {
+      return get().subtitle ? `-\u3000${get().subtitle}` : '';
+    },
   },
 }));

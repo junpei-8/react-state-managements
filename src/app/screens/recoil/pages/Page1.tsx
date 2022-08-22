@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { printLine, getRandomString } from '@/utils';
 import { counterState, headerState } from '../states';
 
-function Page2() {
+function Page1() {
   console.log('Render Page 1');
   printLine('cyan');
 
@@ -55,4 +55,4 @@ function Page2() {
   );
 }
 
-export default Page2;
+export default Page1;
