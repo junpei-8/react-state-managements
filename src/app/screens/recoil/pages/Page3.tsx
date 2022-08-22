@@ -23,14 +23,14 @@ function Page3() {
   // ヘッダーの状態とヘッダーの状態を更新するセッターを取得
   const [header, setHeaderState] = useRecoilState(headerState);
 
-  // ヘッダーにボタンを描画する
+  // ヘッダーにスイッチを描画する
   const attachHeaderContent = () =>
     setHeaderState((state) => ({
       ...state,
       content: <Switch checked={switchState} onChange={toggleSwitch} />,
     }));
 
-  // ヘッダーからボタンを削除する
+  // ヘッダーからスイッチを削除する
   const detachHeaderContent = () => setHeaderState((state) => ({ ...state, content: null }));
 
   // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能だが、

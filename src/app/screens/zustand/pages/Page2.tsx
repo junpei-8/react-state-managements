@@ -13,7 +13,7 @@ function Page2() {
   // ローカルのカウンターをインクリメントする
   const incrementCount = () => setCount((state) => state + 1);
 
-  // 共通のカウンターの状態を更新するセッターを取得
+  // 共通のカウンターの状態を取得
   const globalCounter = useCounterStore();
 
   // 共通のカウンターをインクリメントする

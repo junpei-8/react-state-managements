@@ -13,7 +13,7 @@ function Page3() {
   // ローカルのスイッチの状態を切り替える
   const toggleSwitch = () => setSwitchState((state) => !state);
 
-  // 共通のカウンターの状態を更新するセッターを取得
+  // 共通のカウンターの状態を取得
   const globalCounter = useCounterStore();
 
   // 共通のカウンターをインクリメントする
@@ -22,10 +22,10 @@ function Page3() {
   // ヘッダーの状態を取得
   const headerState = useHeaderStore();
 
-  // ヘッダーにボタンを描画する
+  // ヘッダーにスイッチを描画する
   const attachHeaderContent = () => headerState.attachContent(<Switch checked={switchState} onChange={toggleSwitch} />);
 
-  // ヘッダーからボタンを削除する
+  // ヘッダーからスイッチを削除する
   const detachHeaderContent = () => headerState.detachContent();
 
   // "switchState"状態の変更があった場合、再度アタッチすることで、その変更を伝えることが可能だが、

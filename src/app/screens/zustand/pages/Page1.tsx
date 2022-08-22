@@ -13,13 +13,13 @@ function Page1() {
   // ローカルのカウンターをインクリメントする
   const incrementCount = () => setCount((state) => state + 1);
 
-  // 共通のカウンターの状態を更新するセッターを取得
+  // 共通のカウンターの状態を取得
   const globalCounter = useCounterStore();
 
   // 共通のカウンターをインクリメントする
   const incrementGlobalCount = () => globalCounter.increment();
 
-  // ヘッダーの状態を更新するセッターを取得
+  // ヘッダーの状態を取得
   const headerState = useHeaderStore();
 
   // ヘッダーにサブタイトルを表示する
